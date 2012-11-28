@@ -1,44 +1,44 @@
-The following is a *human script*, to be done manually after the Forge installation and "feedback.fsh" script is run.
+#The following is a *human script*, to be done manually after the Forge installation and "feedback.fsh" script is run.
 
-JBoss Developer Tools
-May be obtained and installed via:
-https://devstudio.jboss.com/download/
-Window> Preferences > Installed Forge Runtimes > Use Forge 1.1.0.Final
+#JBoss Developer Tools
+#May be obtained and installed via:
+#https://devstudio.jboss.com/download/
+#Window> Preferences > Installed Forge Runtimes > Use Forge 1.1.0.Final
 
-Import Project
-CNTL-4 to start Forge
-Select Java File > Show in > Forge Console
+#Import Project
+#CNTL-4 to start Forge
+#Select Java File > Show in > Forge Console
 
-From the Forge Console:
+#From the Forge Console:
 # Install Arquillian Plugin and configure it  (Use JBossAS 7.1.1, not necessarily the default)
-$forge> forge install-plugin arquillian;
-$forge> arquillian setup --container JBOSS_AS_REMOTE_7.X;
+forge install-plugin arquillian;
+arquillian setup --container JBOSS_AS_REMOTE_7.X;
 
 # Generate a test structure
-$forge> arquillian create-test --class org.cedj.javaone2012.feedback.model.FeedbackEntry.java;
+arquillian create-test --class org.cedj.javaone2012.feedback.model.FeedbackEntry.java;
 
-Right-click Project > Maven > Select Maven Profiles > JBOSS_AS_REMOTE_7.X
+#Right-click Project > Maven > Select Maven Profiles > JBOSS_AS_REMOTE_7.X
 
-Edit persistence.xml, so we don't kill data inbetween deployments
-<property name="hibernate.hbm2ddl.auto" value="update"/>
+#Edit persistence.xml, so we don't kill data inbetween deployments
+#<property name="hibernate.hbm2ddl.auto" value="update"/>
 
-Now build the application and deploy it into a local JBossAS7 instance
-$forge> build --notest --profile JBOSS_AS_REMOTE_7.X;
-$forge> forge install-plugin jboss-as-7
-$forge> as7 setup
-$forge> as7 start
-$forge> as7 deploy
+#Now build the application and deploy it into a local JBossAS7 instance
+build --notest --profile JBOSS_AS_REMOTE_7.X;
+forge install-plugin jboss-as-7
+as7 setup
+as7 start
+as7 deploy
 
-Application will be accessible via:
-http://localhost:8080/feedback
+#Application will be accessible via:
+#http://localhost:8080/feedback
 
-OpenShift
-https://openshift.redhat.com/app/
-Create new Account with email: javaone_demo@continuousdev.org
-Namespace: javaonedemo
+#OpenShift
+#https://openshift.redhat.com/app/
+#Create new Account with email: javaone_demo@continuousdev.org
+#Namespace: javaonedemo
 
-Publish via Command-Line/Git or JBoss Tools
+#Publish via Command-Line/Git or JBoss Tools
 
-Open Browser Window:
-http://feedback-javaonedemo.rhcloud.com/
+#Open Browser Window:
+#http://feedback-javaonedemo.rhcloud.com/
 

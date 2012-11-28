@@ -1,0 +1,25 @@
+@RunWith(Arquillian.class)
+public class FeedbackEntryTest {
+	@PersistenceContext
+	private EntityManager em;
+
+	@Deployment
+	public static WebArchive createDeployment() {
+		return ShrinkWrap.createFromZipFile(WebArchive.class, new File(
+				"target/feedback.war"));
+	}
+
+	@Test
+	public void canFindFeedbackByUser() {
+		final FeedbackEntry feedback = em.createQuery(
+				"from " + FeedbackEntry.class.getSimpleName()
+						+ " where twitterHandle='@ALRubinger'",
+				FeedbackEntry.class).getSingleResult();
+		Assert.assertNotNull(feedback);
+	}
+
+	@Test
+	public void testIsDeployed() {
+		Assert.assertNotNull(em);
+	}
+}
